@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://b4seau3ifbpvs"]
+
+[ext_resource type="Script" path="res://scenes/niveis/porta.gd" id="1_xtdbj"]
+[ext_resource type="Texture2D" uid="uid://bo586e6errv3r" path="res://assets/images/sprites/door.png" id="1_yrue8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yq333"]
+size = Vector2(76, 96)
+
+[node name="Porta" type="Area2D"]
+script = ExtResource("1_xtdbj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_yq333")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_yrue8")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://b4seau3ifbpvs"]
+
+[ext_resource type="Texture2D" uid="uid://bo586e6errv3r" path="res://assets/images/sprites/door.png" id="1_yrue8"]
+[ext_resource type="Script" path="res://addons/fire_droid_core/scenes/utils/signal_action_trigger.gd" id="2_h6m31"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yq333"]
+size = Vector2(76, 96)
+
+[node name="Porta" type="Area2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_yq333")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_yrue8")
+
+[node name="SignalActionTrigger" type="Node" parent="."]
+script = ExtResource("2_h6m31")
+action_context = "nivel"
+signal_to_connect = "body_entered"
+action_to_trigger = "sucesso"

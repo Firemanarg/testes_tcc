@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://dbhb3i0lool4x"]
+
+[ext_resource type="Script" path="res://scenes/transition/transition.gd" id="1_uftvn"]
+[ext_resource type="Shader" path="res://resources/shaders/fade.gdshader" id="1_y0p04"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hnqgw"]
+shader = ExtResource("1_y0p04")
+shader_parameter/color = Color(0, 0, 0, 1)
+shader_parameter/thereshold = 0.5
+
+[node name="Transition" type="CanvasLayer"]
+script = ExtResource("1_uftvn")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_hnqgw")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)

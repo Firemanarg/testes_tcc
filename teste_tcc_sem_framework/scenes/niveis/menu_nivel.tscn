@@ -1,0 +1,104 @@
+[gd_scene load_steps=8 format=3 uid="uid://brfimt4ei6e12"]
+
+[ext_resource type="Script" path="res://scenes/niveis/menu_nivel.gd" id="1_8xyf8"]
+[ext_resource type="FontFile" uid="uid://bm1yv0t6w54my" path="res://assets/fonts/title_font.ttf" id="2_rc5qd"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8jow3"]
+bg_color = Color(0.196078, 0.203922, 0.262745, 0.392157)
+expand_margin_left = 150.0
+
+[sub_resource type="Gradient" id="Gradient_lxthm"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.415625, 0.6375)
+colors = PackedColorArray(0.388235, 0.419608, 0.462745, 0.784314, 0.509804, 0.54902, 0.572549, 0.784314, 0.611765, 0.658824, 0.666667, 0.784314)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_xbyof"]
+noise_type = 5
+seed = 2
+frequency = 0.057
+fractal_octaves = 2
+cellular_distance_function = 3
+cellular_return_type = 0
+domain_warp_enabled = true
+domain_warp_type = 2
+domain_warp_amplitude = 50.0
+domain_warp_frequency = 0.225
+domain_warp_fractal_type = 0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_tjqca"]
+seamless = true
+color_ramp = SubResource("Gradient_lxthm")
+noise = SubResource("FastNoiseLite_xbyof")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_bviwk"]
+texture = SubResource("NoiseTexture2D_tjqca")
+expand_margin_left = 150.0
+
+[node name="Menu" type="CanvasLayer"]
+offset = Vector2(-1280, 0)
+transform = Transform2D(1, 0, 0, 1, -1280, 0)
+script = ExtResource("1_8xyf8")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_8jow3")
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 3
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 3
+
+[node name="PanelContainer" type="PanelContainer" parent="HBoxContainer/PanelContainer/MarginContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_bviwk")
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/PanelContainer/MarginContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/PanelContainer/MarginContainer/PanelContainer/MarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="HBoxContainer/PanelContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_rc5qd")
+theme_override_font_sizes/font_size = 26
+text = "Menu"
+horizontal_alignment = 1
+
+[node name="ButtonContinuar" type="Button" parent="HBoxContainer/PanelContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_rc5qd")
+theme_override_font_sizes/font_size = 14
+text = "Continuar"
+
+[node name="ButtonReiniciar" type="Button" parent="HBoxContainer/PanelContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_rc5qd")
+theme_override_font_sizes/font_size = 14
+text = "Reiniciar"
+
+[node name="ButtonSair" type="Button" parent="HBoxContainer/PanelContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_rc5qd")
+theme_override_font_sizes/font_size = 14
+text = "Sair"
+
+[connection signal="pressed" from="HBoxContainer/PanelContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/ButtonContinuar" to="." method="_on_button_continuar_pressed"]
+[connection signal="pressed" from="HBoxContainer/PanelContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/ButtonReiniciar" to="." method="_on_button_reiniciar_pressed"]
+[connection signal="pressed" from="HBoxContainer/PanelContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/ButtonSair" to="." method="_on_button_sair_pressed"]
